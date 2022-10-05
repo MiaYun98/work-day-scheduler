@@ -3,23 +3,35 @@ var today = moment();
 $("#currentDay").text(today.format("dddd MMM Do, YYYY"));
 
 // variable set for the current time with the 24 hour system
-var current = moment().format("HH"); 
+// var current = moment().format("HH"); 
+var current = 12;
 
 // var for the array of the time row
 var timeset = $("textarea");
-
+console.log(typeof timeset[1])
 for (var i = 0; i < timeset.length; i++) {
         //past background
     if (current > timeset[i].dataset.state) {
         timeset[i].classList.add("past");
+        timeset[i].classList.remove("present");
+        timeset[i].classList.remove("future")
     } else if (current == timeset[i].dataset.state) {
         //current background
         timeset[i].classList.add("present");
+        timeset[i].classList.remove("past");
+        timeset[i].classList.remove("future")
     } else if (current < timeset[i].dataset.state) {
         // future background
         timeset[i].classList.add("future");
+        timeset[i].classList.remove("present");
+        timeset[i].classList.remove("past")
     }
 };
+
+if (current > 9) {
+    timeset[0].classList.remove("future")
+    timeset[0].classList.add("past");
+}
 
 var saveData = ['','','','','','','','',''];
 // local storage! 
